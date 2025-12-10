@@ -637,15 +637,19 @@ style=alphabetic,
     \end{enumerate}
     
     \subsection{Counting the symmetric chains in the fibers}
-    Here we want to count the number of chains in the decomposition of a fiber.
-    We start by considering the most simple case $N=\{F_1\}$, then $N^+=\{F_1, E\}$.
-    
-    \begin{prop}
-        If $N={F_1}$ then the number of symmetric chains of the decomposition of $supp_+^{-1}(N^+)$ is
-        \[ N = \min\{ m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
+    Here we want to count the number of chains in the decomposition of a fiber and their length.
+    We first proceed by computing the case $N = \{F_1 \}$ and $N=\{F_1, F_2 \}$, then we generalize the results.
+    Consider the symmetric chain decomposition of a poset $\mathcal{P}$, then we define
+    \[ SC(\mathcal{P}) = \# \{ \text{ chains in the decomposition of $\mathcal{P}$} \} \]
+    \begin{enumerate} 
+        \item[$N=\{F_1\}$] We start by considering the most simple case $N=\{F_1\}$, and so $N^+=\{F_1, E\}$.
+        
+    \begin{prop} \label{prop:n_chain_E}
+        If $N=\{F_1\}$ then the number of symmetric chains in the decomposition of $supp_+^{-1}(N^+)$ is
+        \[ SC(supp_+^{-1}(N^+)) = \min\{ m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
     \end{prop}
     
-    \begin{proof}
+    \begin{proof} 
         Consider $\gamma$ the only chain in the decomposition of $D(x_1^{m_1-1})$.
         The length of $\gamma$ is 
         \[ L(\gamma) = m_1 -1.\]
@@ -720,28 +724,27 @@ style=alphabetic,
                         \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-3-1.north west) -- ([xshift=1.65cm]m-3-1.north east) -- ([xshift=1.65cm]m-5-1.south east) -- ([yshift=-0.5mm]m-5-1.south west) -- cycle;
                 \end{tikzpicture} \end{center}
 
-                And the number of chains is equal to the number of column of the matrix, which is equal to $m_{N^+}(F_1)-1$.
+                The number of chains is equal to the number of column of the matrix, which is equal to $m_{N^+}(F_1)-1$.
         \end{enumerate}
 
-        So, defined $N = $number of chains in the decomposition we have that:
-        \[ N = \min\{m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
+        
+
+        In conclusion we found that
+        \[ SC(supp_+^{-1}(N^+)) = \min\{m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
     \end{proof}
 
-    \begin{rmk}
-        Observe that if we consider the set $\{F_1, F_2 \}$, and we compute the chains in the decomposition of $Div(x_{F_1}^{m_1-1} x_{F_2}^{m_2-1})$ the result is different since we consider the exponent of $x_{F_2}$ to be at least $1$. In this case the result is
-        \[ N = \min\{m_{N^+}(F_1), m_{N^+}(F_2)\} -1.\]
-    \end{rmk}
-
-    We can also compute the length of this chains, infact
-    \begin{prop}
-        If $N=\{F_1\}$ then the length of symmetric chains of the decomposition of $supp_+^{-1}(N^+)$ is
-        \[ L(\gamma_1) = (m_1 - 1) + (m_E -1) \]
-        \[ L(\gamma_i) = L(\gamma_1) - 2(i-1).\]
-    \end{prop}
+    We give here a Lemma to compute also the length o the chains in the decomposition of $supp_+^{-1}(N^+)$.
+    \begin{lem} \label{lem:lengthF_1}
+        If $N=\{F_1\}$, define 
+        \[ K = SC(supp_+^{-1}(N^+)), \]
+        then the length of symmetric chains of the decomposition of $supp_+^{-1}(N^+)$ is
+        \[ L(\gamma_1) = (m_1 - 1) + (m_E -1); \]
+        \[ L(\gamma_i) = L(\gamma_1) - 2(i-1);\]
+        for $1 \le i \le K$ and where $\gamma_1$ is the most external, and the others are progressively the more internals.
+    \end{lem}
 
     \begin{proof}
-        Call $m_1 = m_{N^+}(F_1)$ and $m_E = m_{N^+}(E)$.
-        Calling the chains 
+        Name the chains as follows.
         \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
                     \matrix [mymatrix,text width=0.6em,align=center] (m) {
                         \gamma_1: & x_{F_1}^{ } & x_{F_1}^2 &\dots & x_{F_1}^{m_1-2}  & x_{F_1}^{m_1-1}\\
@@ -750,9 +753,9 @@ style=alphabetic,
                         
                         \vdots & \vdots & \vdots & & \vdots & \vdots \\
                         
-                        \gamma_{m_E-2}:& x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\
+                        \gamma_{K-1}:& x_{F_1}x_{E}^{m_E -2} & x_{F_1}^2x_{E}^{m_E -2} &\dots & x_{F_1}^{m_1-2} x_{E}^{m_E -2} & x_{F_1}^{m_1-1} x_{E}^{m_E -2} \\
                         
-                        \gamma_{m_E-1}: & x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\};
+                        \gamma_{K}: & x_{F_1}x_{E}^{m_E -1} & x_{F_1}^2x_{E}^{m_E -1} &\dots & x_{F_1}^{m_1-2} x_{E}^{m_E -1} & x_{F_1}^{m_1-1} x_{E}^{m_E -1} \\};
                     
                     \pgfmathsetmacro{\offset}{0.5mm}
                         \draw [thick,red,rounded corners=1mm] (m-1-2.north west) -- ([xshift=1.7cm]m-1-6.north east) -- ([xshift=1.7cm]m-5-6.south east) -- (m-5-6.south west) -- ([yshift=0.1cm]m-1-6.south west) -- (m-1-2.south west) -- cycle;
@@ -764,7 +767,7 @@ style=alphabetic,
                         \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-5-2.north west) -- ([xshift=1.65cm]m-5-2.north east) -- ([xshift=1.65cm]m-5-2.south east) -- ([yshift=-0.5mm]m-5-2.south west) -- cycle;
                 \end{tikzpicture} \end{center}
 
-                The length of $\gamma_1$ is the sum of all his elements. The number of elements in the first line is $m_1 -1$, and in the last row (excluded the first element) is $m_E-1$, therefore:
+                The number of elements in the first line is $m_1 -1$, and in the last row (excluded the first element) is $m_E-1$, therefore:
                 \[ L(\gamma_1) = (m_1 - 1) + (m_E -1).\]
 
                 The second chain has $m_1-2$ elements in the row, and $m_E-2$ elements in the column, so
@@ -776,12 +779,51 @@ style=alphabetic,
                 \[ L(\gamma_{n+1}) = L(\gamma_n) - 2 = L(\gamma_1) - 2(n-1) - 2 = L(\gamma_1) - 2 n.\]
     \end{proof}
 
+    So we have the following theorem
+    \begin{thm}
+    Consider $N= \{F_1\}$, with $m_1 > 0$ and $m_E>0$, and such that $N^+$ is in the image of $supp_+$, then
+    \[ SC(supp_+^{-1}(N^+)) = \min\{ m_{N^+}(F_1) -1, m_{N^+}(E)\}, \]
+    and the length of the chains in the decomposition is
+            \[ L(\gamma_i) = m_1 + m_E -2i, \]
+        for $1 \le i \le SC(supp_+^{-1}(N^+))$.
+    \end{thm}
+
+    \begin{proof}
+        $L(\gamma_1) = m_1 + m_E - 2$ by Lemma \ref{lem:lengthF_1}.
+        So $L(\gamma_i) = L(\gamma_1) - 2(i-1) = m_1 + m_E - 2 -2(i-1) = m_1 + m_E - 2i$.
+    \end{proof}
+
+\item[$N=\{F_1, F_2\}$] We consider now the case $N=\{F_1, F_2 \}$.
+    \begin{prop}
+        If $N = \{F_1, F_2 \}$, then
+        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})= \min\{m_1, m_2\} -1.\]
+    \end{prop}
+
+    \begin{proof}
+        The proof is the same as the Proposition \ref{prop:n_chain_E} but considering the matrix
+        \[ M^\gamma_{F_2, m_2}\]
+        where $\gamma$ is the only chain in the decomposition of $D(x_{F_1}^{m_1-1})$.
+        In this matrix the number of rows is $m_2-1$, the number of columns is $m_1-1$, therefore
+        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})= \min\{m_1, m_2\} -1. \]
+    \end{proof}
+
+    To proceed in computing 
+    \[ SC(supp_+^{-1}(N^+)\]
+    we need to compute also the length of the chains in the decomposition of $D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})$.
+
+    \begin{lem}
+        
+    \end{lem}
+    
+    
+
     \begin{rmk}
         In the case we consider $\{F_1, F_2\}$, then the previous result is
         \[ L(\gamma_1) = (m_1 - 1) + (m_2 - 2) \]
         \[ L(\gamma_i) = L(\gamma_1) - 2(i-1).\]
     \end{rmk}
 
+    \end{enumerate}
     We now proceed with the case $N = \{ F_1, F_2\}$. In this case $N^+ = \{F_1, F_2, E\}$, and by the privious two proposition we have that the number of chains in the decomposition of $x_1^{m_1 -1} x_{F_2}^{m_2-1}$ is 
     \[ N = \min\{m_{N^+}(F_1), m_{N^+}(F_2)\} - 1.\]
     We call these chains $\gamma_1, \dots, \gamma_N$, their length is given by 
