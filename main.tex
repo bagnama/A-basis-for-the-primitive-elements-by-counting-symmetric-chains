@@ -104,7 +104,7 @@ style=alphabetic,
     \fontsize{12pt}{0pt} % dimensione del font e spaziatura tra le righe
 
     \section{Symmetric chain decomposition}
-
+    \label{SEC1}
     In this first section we introduce symmetric chain decompositions for a poset. 
     Later on we use this decomposition for divisibility poset of monomials.
     A symmetric chain decomposition of a poset is a way to decompose it in a disjoint union of symmetric total ordered set.
@@ -482,10 +482,10 @@ style=alphabetic,
         We recall here the definition of the Feichtner-Yuzvinsky monomial basis for the Chow ring $\mathcal{A}(\mathcal{L}, \mathcal{G})$:
         \[ FY := \left\{ x_{F_1}^{m_1} \cdots x_{F_l}^{m_l} \, : \, N=\{F_1, \dots, F_l \} \in \mathcal{N}(\mathcal{L},\mathcal{G}), \, 1 \le m_i \le m_N(F_i), \, i \in \{ 1, \dots, l\} \right\}\]
         where $m_N(F) = rk(F) - rk(\vee N_{\le F}).$
-
+        
         Define the function
-        \[ supp_+ : FY \longrightarrow \mathcal{N}(\mathcal{L}, \mathcal{G})\]
-        called extended support map, as follows
+        \[ supp_+ : FY \longrightarrow \mathcal{N}(\mathcal{L}, \mathcal{G}),\]
+        where $\mathcal{N}(\mathcal{L}, \mathcal{G})$ is the set of nested sets with respect to the building set $\mathcal{G}$, called extended support map, as follows
         
             \begin{defn}
                 If $m_i \ge 1$ for $1 \le i \le l$, then
@@ -495,55 +495,149 @@ style=alphabetic,
         Observe that $supp_+$ is well-defined because $\mathcal{N}(\mathcal{L}, \mathcal{G})$ is a simplicial complex, i.e.
         \[ \{F_1, \dots, F_l\} \in \mathcal{N}(\mathcal{L}, \mathcal{G}) \implies \{F_1, \dots, F_l\} \cup \{E \} \in \mathcal{N}(\mathcal{L}, \mathcal{G}). \]
 
-        We use the function $supp_+$ to cover the set $FY$ using its fiber. Consider $N^+ =\{F_1, \dots, F_l, E\} \subset \mathcal{G}$ a $\mathcal{G}$-nested set in the image of $supp_+$ then the fiber has the following description:
-        \[ supp_+^{-1} (N^+) = \{x_{F_1}^{m_1} \cdots x_{F_l}^{m_l} \cdot x_E^{m_{l+1}}  \}\]
+        We use the function $supp_+$ to cover the set $FY$ using its fiber. Consider $N^+ =\{F_1, \dots, F_l, E\} \subset \mathcal{G}$ a $\mathcal{G}$-nested set in the image of $supp_+$, then the fiber has the following description:
+        \[ supp_+^{-1} (N^+) = \{x_{F_1}^{k_1} \cdots x_{F_l}^{k_l} \cdot x_E^{k_E}  \}\]
         where the exponents satisfy the inequalities:
-        \[ 1 \le m_i \le m_{N^+}(F_i) - 1, \text{ for } 1 \le i \le l;\]
-        \[ 0 \le m_{l+1} \le m_{N^+}(E)- 1.\]
+        \[ 1 \le k_i \le m_{N^+}(F_i) - 1, \text{ for } 1 \le i \le l;\]
+        \[ 0 \le k_E \le m_{N^+}(E)- 1.\]
 
-        Consider a nested set $N = \{ F_1, \dots, F_k\}$, and suppose that $N^+ \in Im(supp_+)$, we want to apply the recursive method discussed previously to obtain a symmetric chain decomposition of $supp_+^{-1}(N^+)$.
+        Since we need to construct matrices we establish here some notation.
+        Given a chain $\gamma$ in $FY$, an element $F \in \mathcal{L}$ and $k \in \mathbb{N} \setminus \{0\}$, we define the matrix
+        \[ M^{\gamma}_{F, k} = 
+        \begin{bmatrix}
+         \gamma \cdot x_F \\
+         \gamma \cdot x_F^2 \\
+         \vdots \\
+         \gamma \cdot x_F^{k-1}
+        \end{bmatrix}  \]
+        and
+        \[ M^{\gamma}_{E, k} = 
+            \begin{bmatrix}
+             \gamma \\
+             \gamma \cdot x_E \\
+             \gamma \cdot x_E^2 \\
+             \vdots \\
+             \gamma \cdot x_E^{k-1}
+            \end{bmatrix}  \]
 
-        To obtain a symmetric chain decomposition we proceed recursively. Observe that since all the elements of the fibers must contain $x_{F_1}, x_{F_2}, \dots, x_{F_k}$ the minimum monomial is $x_{F_1} x_{F_2} \cdots x_{F_k}$.
-
-        Consider the monomial $m = x_1 x_2 \cdots x_k$, we define $Div(m)$ as the divisibility poset where the minimum element is $x_1 x_2 \cdots x_k$, instead of the single variables $x_1, \dots, x_k$.
-
-        \begin{enumerate}
-            \item[Case $x_{F_1}$:] Consider the element $m_1  =x_{F_1}^{m_{N^+}(F_1) -1}$,       then the symmetric chain decomposition of $Div(m_1)$ is given by the only chain
-                \[ x_{F_1} \prec x_{F_1}^2 \prec x_{F_1}^3 \prec \dots \prec x_{F_1}^{m_{N^+}(F_1)-2} \prec x_{F_1}^{m_{N^+}(F_1)-1}.\]
-                \begin{rmk}
-                    We omitted $1$ as first element of the chain since we are interested in having all the variables in the minimal polynomial.
-                \end{rmk}
-            \item[Case $x_{F_1}, x_{F_2}$:]
-                To compute the symmetric chain decomposition of $Div(m_2)$, where \[m_2 = x_{F_1}^{m_{N^+}(F1) -1} x_{F_2}^{m_{N^+}(F2) -1},\]
-                we consider the symmetric chain decomposition of $Div(m_1)$ and we define a matrix where the $i-th$ row is the chain of $m_1$ multiplied by $x_{F_2}^i$ with $ 1 \le i \le m_{N^+}(F_2) -1$.
-                Denoting $m_1 = m_{N^+}(F_1)$ and $m_2 = m_{N^+}(F_2)$, we obtain the matrix
-
-                \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
-                    \matrix [mymatrix,text width=0.6em,align=center] (m) {
-                        x_{F_1}x_{F_2} & x_{F_1}^2x_{F_2} & x_{F_1}^3x_{F_2} &\dots & x_{F_1}^{m_1-2} x_{F_2} & x_{F_1}^{m_1-1} x_{F_2} \\
-                        x_{F_1}x_{F_2}^2 & x_{F_1}^2x_{F_2}^2 & x_{F_1}^3x_{F_2}^2 &\dots & x_{F_1}^{m_1-2} x_{F_2}^2  & x_{F_1}^{m_1-1} x_{F_2}^2 \\
-                        x_{F_1}x_{F_2}^3 & x_{F_1}^2x_{F_2}^3 & x_{F_1}^3x_{F_2}^3 &\dots & x_{F_1}^{m_1-2} x_{F_2}^3 & x_{F_1}^{m_1-1} x_{F_2}^3 \\
-                        \vdots & \vdots & \cdots & \vdots & \vdots & \vdots \\
-                        x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} & x_{F_1}^3x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\};
-                    \pgfmathsetmacro{\offset}{0.5mm}
-                        \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-6.north east) -- ([xshift=1.7cm]m-5-6.south east) -- (m-5-6.south west) -- ([yshift=0.1cm]m-1-6.south west) -- (m-1-1.south west) -- cycle;
+        Consider a nested set $N = \{ F_1, \dots, F_l\}$ such that $N^+$ is in the image of $supp_+$. We want to apply the recursive method discussed in section \ref{SEC1} to obtain a symmetric chain decomposition of $supp_+^{-1}(N^+)$.
         
-                        \draw [thick, blue, rounded corners=1mm] (m-2-1.north west) -- ([xshift=1.65cm]m-2-5.north east) -- ([xshift=1.65cm]m-5-5.south east) -- (m-5-5.south west) -- (m-2-5.south west) -- (m-2-1.south west) -- cycle;
-                \end{tikzpicture} \end{center}
-                The chains are obtained by the layers of the matrix as depicted in figure.
+        \begin{rmk}
+            Observe that since all the elements of the fibers must contain $x_{F_1}, x_{F_2}, \dots, x_{F_k}$ the minimum monomial in $supp_+^{-1}(N^+)$ is $x_{F_1} x_{F_2} \cdots x_{F_k}$.
+        \end{rmk}
+        
+        \begin{notat*}
+        Consider the monomial $p = x_1^{k_1} x_2^{k_2} \cdots x_l^{k_l}$, we define $D(p)$ as the divisibility poset where the minimum element is $x_1 x_2 \cdots x_l$, instead of the single variables $x_1, \dots, x_l$.
+        \end{notat*}
+        
+        \begin{ex}
+            Let $p = x_1^2 x_2 ^ 2 x_3 ^ 3$, then $D(p)$ is depicted in Figure \ref{fig:HD(p)}.
+        \begin{figure}[h!]
+        \begin{center} \begin{tikzpicture}
+            \node (top) at (0,0) {$x_1^2 x_2 ^ 2 x_3^3$};
+                    
+            \node (n1) at (-2.4, -2)  {$x_1^2 x_2^2 x_3^2$};
+            \node (n2) at (0, -2)  {$x_1 x_2^2 x_3^3$};
+            \node (n3) at (2.4, -2)  {$x_1^2 x_2 x_3^3$};
+        
+            \draw (top) -- (n1);
+            \draw (top) -- (n2);
+            \draw (top) -- (n3);
+        
+            \node (n10) at (-4, -4)  {$x_1^2 x_2^2 x_3$};
+            \node (n11) at (-1.5, -4)  {$x_1^2 x_2 x_3^2$};
+            \node (n12) at (1.5, -4)  {$x_1 x_2^2 x_3^2$};
+            \node (n13) at (4, -4)  {$x_1 x_2 x_3^3$};
+            
+            \draw (n1) -- (n10);
+            \draw (n1) -- (n11);
+            \draw (n1) -- (n12);
+            \draw (n2) -- (n12);
+            \draw (n2) -- (n13);
+            \draw (n3) -- (n11);
+            \draw (n3) -- (n13);
+            
+            \node (n15) at (-2.4, -6)  {$x_1^2 x_2 x_3$};
+            \node (n16) at (0, -6)  {$x_1 x_2^2 x_3$};
+            \node (n17) at (2.4, -6)  {$x_1 x_2 x_3^2$};
+        
+            \draw (n10) -- (n15);
+            \draw (n11) -- (n15);
+            \draw (n10) -- (n16);
+            \draw (n12) -- (n16);
+            \draw (n11) -- (n17);
+            \draw (n12) -- (n17);
+            \draw (n13) -- (n17);
+                    
+            \node (bottom) at (0, -8) {$x_1 x_2 x_3$};
+        
+            \draw (n15) -- (bottom);
+            \draw (n16) -- (bottom);
+            \draw (n17) -- (bottom);
+        \end{tikzpicture} \end{center}
+        \caption{Hasse diagram of $D(p)$.}
+        \label{fig:HD(p)}
+        \end{figure}
+        \end{ex}
 
-            \item[Case $x_{F_1},\dots,x_{F_k}$:]    
-                Consider now the monomial \[m_k = x_{F_1}^{m_1    -1}x_{F_2}^{m_2 -1} \cdots x_{F_k}^{m_k -1}.\]
-                After $k-1$ step, we want to compute the symmetric chain decomposition of $Div(m_k)$.
-                To do that, for every chain in the decomposition of $m_{k-1}$ we create a matrix where the $i-th$ row is the selected chain multiplied by $x_{F_k}^i$, with $1 \le i \le m_{N^+}(F_k) -1$. To extract the chains of $Div(m_k)$ we peel off the matrices as before.
+        We proceed by considering one element at a time and constructing the symmetric chains recursively.
+        \begin{notat*}
+            We denote $m_i := m_{N^+}(F_i)$ and $m_E := m_{N^+}(E)$.
+        \end{notat*}
+        
+        \begin{enumerate}
+            \item[$x_{F_1}$:] consider the monomial $p_1 = x_{F_1}^{m_1 -1}$.
+                The symmetric chain decomposition of $D(p_1)$ is given by the only chain
+                \[ x_{F_1} \prec x_{F_1}^2 \prec x_{F_1}^3 \prec \dots \prec x_{F_1}^{m_1 -2} \prec x_{F_1}^{m_1 -1},\]
+                where $\prec$ is the divisibility ordering.
+            
+            \item[$x_{F_1}, x_{F_2}$:]
+                consider the monomial $p_2 = x_{F_1}^{m_1 -1} x_{F_2}^{m_2 -1}$.
+                To compute the symmetric chain decomposition of $D(p_2)$,
+                we consider the only chain in the symmetric chain decomposition of $D(p_1)$, call it $\gamma$, and we consider the matrix
+                \[ M^{\gamma}_{F_2, m_2}. \]
+                \begin{figure}
+                    \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
+                        \matrix [mymatrix,text width=0.6em,align=center] (m) {
+                            x_{F_1}x_{F_2} & x_{F_1}^2x_{F_2} & x_{F_1}^3x_{F_2} &\dots & x_{F_1}^{m_1-2} x_{F_2} & x_{F_1}^{m_1-1} x_{F_2} \\
+                            x_{F_1}x_{F_2}^2 & x_{F_1}^2x_{F_2}^2 & x_{F_1}^3x_{F_2}^2 &\dots & x_{F_1}^{m_1-2} x_{F_2}^2  & x_{F_1}^{m_1-1} x_{F_2}^2 \\
+                            x_{F_1}x_{F_2}^3 & x_{F_1}^2x_{F_2}^3 & x_{F_1}^3x_{F_2}^3 &\dots & x_{F_1}^{m_1-2} x_{F_2}^3 & x_{F_1}^{m_1-1} x_{F_2}^3 \\
+                            \vdots & \vdots & \cdots & \vdots & \vdots & \vdots \\
+                            x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} & x_{F_1}^3x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\};
+                            
+                            \pgfmathsetmacro{\offset}{0.5mm}
+                            
+                            \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-6.north east) -- ([xshift=1.7cm]m-5-6.south east) -- (m-5-6.south west) -- ([yshift=0.1cm]m-1-6.south west) -- (m-1-1.south west) -- cycle;
+        
+                            \draw [thick, blue, rounded corners=1mm] (m-2-1.north west) -- ([xshift=1.65cm]m-2-5.north east) -- ([xshift=1.65cm]m-5-5.south east) -- (m-5-5.south west) -- (m-2-5.south west) -- (m-2-1.south west) -- cycle;
+                    \end{tikzpicture} \end{center}
+                    \caption{Matrix $M^{\gamma}_{F_2, m_2}$ with highlighted chains.}
+                    \label{fig:MF2}
+                \end{figure}
+                The chains are obtained by the layers of the matrix as depicted in Figure \ref{fig:MF2}.
 
-            \item[Case $x_{F_1}, \dots, x_E$:]
-                The last step is to add $x_E$ to the monomial. Since in the fiber we also have all the monomials without $x_E$, i.e. we consider also the case in which the exponent of $x_E$ is zero, for every chain in $Div(m_k)$ we create a matrix where the $i-th$ row is the selected chain multiplied by $x_E^{i-1}$ where $1 \le i \le m_{N^+}(E)$.
+            \item[$x_{F_1},\dots,x_{F_l}$:]    
+                consider the monomial $p_l = x_{F_1}^{m_1    -1}x_{F_2}^{m_2 -1} \cdots x_{F_l}^{m_l -1}.$
+                To compute the symmetric chain decomposition of $D(p_k)$ we consider the chains of the decomposition of $D(p_{k-1})$, call them $\gamma_1, \dots, \gamma_S$, and for $ 1 \le i \le S$ we construct the matrix
+                \[ M^{\gamma_i}_{F_l, m_l},\]
+                and considering its layers as before we obtain all our symmetric chains.
+
+                
+            \item[$x_{F_1},\dots,x_{F_l}, x_E$:]
+                consider the monomial $p_E = x_{F_1}^{m_1    -1}x_{F_2}^{m_2 -1} \cdots x_{F_l}^{m_l -1}x_E^{m_E -1}$.
+                Then we have that 
+                \[ D(p_E) = supp_+^{-1}(N^+),\]
+                so the process terminates.
+                
+                In this case we consider the symmetric chains in the decomposition of $D(p_l)$, call them
+                \[ \gamma^{l}_1, \dots, \gamma^l_{S_l},\]
+                and for all $1 \le i \le S_l$ we construct the matrix
+                \[ M^{\gamma^l_i}_{E, m_E}.\]
+                The chains are constructed by considering the layers of the matrix as before.
     \end{enumerate}
-
-    INSERIRE UN ESEMPIO.
     
     \subsection{Counting the symmetric chains in the fibers}
+    Here we want to count the number of chains in the decomposition of a fiber.
     We start by considering the most simple case $N=\{F_1\}$, then $N^+=\{F_1, E\}$.
     
     \begin{prop}
@@ -552,10 +646,16 @@ style=alphabetic,
     \end{prop}
     
     \begin{proof}
-        Call $m_1 = m_{N^+}(F_1)$ and $m_E = m_{N^+}(E)$. Then we have two case
+        Consider $\gamma$ the only chain in the decomposition of $D(x_1^{m_1-1})$.
+        The length of $\gamma$ is 
+        \[ L(\gamma) = m_1 -1.\]
+        Therefore the matrix
+        \[ M^{\gamma}_{E, m_E}\]
+        has $m_1 -1$ columns and $m_E$ rows.
+        We have two cases:        
         \begin{enumerate}
             \item[$m_1 > m_E$:]
-            in this case we have two possibilities. The first possibility is $m_1 = m_E+1$. In this condition we have that the matrix of chains is a square matrix
+            in this case we have two possibilities. The first possibility is $m_1 = m_E+1$. In this condition we have that the matrix $M^{\gamma}_{E, m_E}$ is a square matrix.
             
             \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
                     \matrix [mymatrix,text width=0.6em,align=center] (m) {
@@ -565,9 +665,9 @@ style=alphabetic,
                         
                         \vdots & \vdots & \cdots & \vdots & \vdots \\
                         
-                        x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\
+                        x_{F_1}x_{E}^{m_E -2} & x_{F_1}^2x_{E}^{m_E -2} &\dots & x_{F_1}^{m_1-2} x_{E}^{m_E -2} & x_{F_1}^{m_1-1} x_{E}^{m_E -2} \\
                         
-                        x_{F_1}x_{F_2}^{m_2 -1} & x_{F_1}^2x_{F_2}^{m_2 -1} &\dots & x_{F_1}^{m_1-2} x_{F_2}^{m_2 -1} & x_{F_1}^{m_1-1} x_{F_2}^{m_2 -1} \\};
+                        x_{F_1}x_{E}^{m_E -1} & x_{F_1}^2x_{E}^{m_E -1} &\dots & x_{F_1}^{m_1-2} x_{E}^{m_E -1} & x_{F_1}^{m_1-1} x_{E}^{m_E -1} \\};
                     
                     \pgfmathsetmacro{\offset}{0.5mm}
                         \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-5.north east) -- ([xshift=1.7cm]m-5-5.south east) -- (m-5-5.south west) -- ([yshift=0.1cm]m-1-5.south west) -- (m-1-1.south west) -- cycle;
@@ -578,7 +678,8 @@ style=alphabetic,
 
                         \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-5-1.north west) -- ([xshift=1.65cm]m-5-1.north east) -- ([xshift=1.65cm]m-5-1.south east) -- ([yshift=-0.5mm]m-5-1.south west) -- cycle;
                 \end{tikzpicture} \end{center}
-                In this case the last chain is formed by on element. Therefore the number of chains is equal to the number of row or column of the matrix which is $m_{N^+}(F_1) -1$.
+                
+                Therefore the number of chains is equal to the number of row or column of the matrix which is $m_1 -1 = m_E$.
 
                 The second possibility is when $m_1 > m_E+1$. Here the last chain is horizontal.
 
@@ -725,129 +826,7 @@ style=alphabetic,
         and it is a deformation of the Lefschetz operator.
     \end{rmk}
 
-    We give here an example.
-    \begin{ex} \label{ex:fiber}
     
-        Let $\mathcal{L} = \mathcal{L}_{\mathcal{M}}$ be the lattice of flats of a simple matroid $\mathcal{M}$ having $rk(E) = 10 = r+1$ with $r=9$ and $\mathcal{G} = \mathcal{G_{\max}}$. Consider a $\mathcal{G}$-nested set $N^+ = \{F_1, F_2, E\}$ where $F_1 < F_2$ are flats with $rk(F_1) = 3$, $rk(F_2) = 7$. Linearly ordering $\{F_1, F_2 \}$ as $(F_1, F_2)$, then the divisibility poset on the fiber $supp_+^{-1}(\{F_1, F_2, E \})$ is depicted in Figure \ref{fig:suppfiber1}.
-        And a possible choice of symmetric chain decomposition looks as depicted in Figure \ref{fig:symmchainsupp}.
-        
-        \begin{figure}[h!]
-        \begin{center} \begin{tikzpicture}
-            \node (top) at (0,0) {$x_{F_1}^2x_{F_2}^3x_E^2$};
-                    
-            \node (n1) at (-2.4, -2)  {$x_{F_1}^2x_{F_2}^3x_E$};
-                    \node (n2) at (0, -2)  {$x_{F_1}x_{F_2}^3x_E^2$};
-                    \node (n3) at (2.4, -2)  {$x_{F_1}^2x_{F_2}^2x_E^2$};
-        
-                    \draw (top) -- (n1);
-                    \draw (top) -- (n2);
-                    \draw (top) -- (n3);
-                    
-                    \node (n5) at (-4.8, -4)  {$x_{F_1}^2x_{F_2}^3$};
-                    \node (n6) at (-2.4, -4)  {$x_{F_1}x_{F_2}^3x_E$};
-                    \node (n7) at (0, -4)  {$x_{F_1}^2x_{F_2}^2x_E$};
-                    \node (n8) at (2.4, -4)  {$x_{F_1}x_{F_2}^2x_E^2$};
-                    \node (n9) at (4.8, -4) {$x_{F_1}^2x_{F_2}x_E^2$};
-        
-                    \draw (n1) -- (n5);
-                    \draw (n1) -- (n6);
-                    \draw (n1) -- (n7);
-                    \draw (n2) -- (n6);
-                    \draw (n2) -- (n8);
-                    \draw (n3) -- (n7);
-                    \draw (n3) -- (n8);
-                    \draw (n3) -- (n9);
-                                
-                    \node (n10) at (-4.8, -6)  {$x_{F_1}x_{F_2}^3$};
-                    \node (n11) at (-2.4, -6)  {$x_{F_1}^2x_{F_2}^2$};
-                    \node (n12) at (0, -6)  {$x_{F_1}x_{F_2}^2x_E$};
-                    \node (n13) at (2.4, -6)  {$x_{F_1}^2x_{F_2}x_E$};
-                    \node (n14) at (4.8, -6) {$x_{F_1}x_{F_2}x_E^2$};
-        
-                    \draw (n5) -- (n10);
-                    \draw (n5) -- (n11);
-                    \draw (n6) -- (n10);
-                    \draw (n6) -- (n12);
-                    \draw (n7) -- (n11);
-                    \draw (n7) -- (n12);
-                    \draw (n7) -- (n13);
-                    \draw (n8) -- (n12);
-                    \draw (n8) -- (n14);
-                    \draw (n9) -- (n13);
-                    \draw (n9) -- (n14);
-                    
-                    \node (n15) at (-2.4, -8)  {$x_{F_1}^2x_{F_2}x_{F_3}$};
-                    \node (n16) at (0, -8)  {$x_{F_1}x_{F_2}^2x_{F_3}$};
-                    \node (n17) at (2.4, -8)  {$x_{F_1}x_{F_2}x_{F_3}^2$};
-        
-                    \draw (n10) -- (n15);
-                    \draw (n11) -- (n15);
-                    \draw (n12) -- (n15);
-                    \draw (n11) -- (n16);
-                    \draw (n13) -- (n16);
-                    \draw (n12) -- (n17);
-                    \draw (n13) -- (n17);
-                    \draw (n14) -- (n17);
-                    
-                    \node (bottom) at (0, -10) {$x_{F_1}x_{F_2}$};
-        
-                    \draw (n15) -- (bottom);
-                    \draw (n16) -- (bottom);
-                    \draw (n17) -- (bottom);
-        \end{tikzpicture} \end{center}
-        \caption{Hasse diagram of the fiber $supp_+^{-1}(F_1, F_2, E)$.}
-        \label{fig:suppfiber1}
-        \end{figure}
-        
-        
-        \begin{figure}[h!]
-        \begin{center} \begin{tikzpicture}
-            \node (top) at (0,0) {$x_{F_1}^2x_{F_2}^3x_E^2$};
-                    
-            \node (n1) at (-2.4, -2)  {$x_{F_1}^2x_{F_2}^3x_E$};
-                    \node (n2) at (0, -2)  {$x_{F_1}x_{F_2}^3x_E^2$};
-                    \node (n3) at (2.4, -2)  {$x_{F_1}^2x_{F_2}^2x_E^2$};
-        
-                    \draw (top) -- (n2);
-                    
-                    \node (n5) at (-4.8, -4)  {$x_{F_1}^2x_{F_2}^3$};
-                    \node (n6) at (-2.4, -4)  {$x_{F_1}x_{F_2}^3x_E$};
-                    \node (n7) at (0, -4)  {$x_{F_1}^2x_{F_2}^2x_E$};
-                    \node (n8) at (2.4, -4)  {$x_{F_1}x_{F_2}^2x_E^2$};
-                    \node (n9) at (4.8, -4) {$x_{F_1}^2x_{F_2}x_E^2$};
-        
-                    \draw (n1) -- (n6);
-                    \draw (n2) -- (n8);
-                    \draw (n3) -- (n9);
-                                
-                    \node (n10) at (-4.8, -6)  {$x_{F_1}x_{F_2}^3$};
-                    \node (n11) at (-2.4, -6)  {$x_{F_1}^2x_{F_2}^2$};
-                    \node (n12) at (0, -6)  {$x_{F_1}x_{F_2}^2x_E$};
-                    \node (n13) at (2.4, -6)  {$x_{F_1}^2x_{F_2}x_E$};
-                    \node (n14) at (4.8, -6) {$x_{F_1}x_{F_2}x_E^2$};
-        
-                    \draw (n5) -- (n10);
-                    \draw (n6) -- (n12);
-                    \draw (n7) -- (n11);
-                    \draw (n8) -- (n14);
-                    \draw (n9) -- (n13);
-                    
-                    \node (n15) at (-2.4, -8)  {$x_{F_1}^2x_{F_2}x_{F_3}$};
-                    \node (n16) at (0, -8)  {$x_{F_1}x_{F_2}^2x_{F_3}$};
-                    \node (n17) at (2.4, -8)  {$x_{F_1}x_{F_2}x_{F_3}^2$};
-        
-                    \draw (n12) -- (n15);
-                    \draw (n13) -- (n16);
-                    \draw (n14) -- (n17);
-                    
-                    \node (bottom) at (0, -10) {$x_{F_1}x_{F_2}$};
-        
-                    \draw (n17) -- (bottom);
-        \end{tikzpicture} \end{center}
-        \caption{A possible symmetric chain decomposition for $supp_+^{-1}(F_1, F_2, E)$.}
-        \label{fig:symmchainsupp}
-        \end{figure}
-    \end{ex}    
 
     Since $\lambda$ send an element of the chain in the next element of the same chain, we can apply it for all the length of the chain and not only for element in $FY^k$ with $k < \frac{r}{2}$. 
 
@@ -942,7 +921,37 @@ style=alphabetic,
     By the previous theorem the primitive elements are all the first elements of the chains.
     The number of this elements is equal to the number of chains in the decomposition, and these elements are the first $N$ elements of the first column, where $N$ is the number of chains.
     But $N= \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)\}$, so the nested sets of the type $N^+=\{F_1, E\}$, contribute to the basis with the elements
-    \[ \{ x_{F_1}x_E^k \mid 0 \le k \le \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)\} \}. \]
+    \[ \{ x_{F_1}x_E^k \mid 0 \le k \le \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)-1\} \}. \]
+
+    Consider now the nested set $N^+ = \{ F_1, F_2, E\}$. The first elements of the chains in the decomposition of $p=x_{F_1}^{m_1-1} x_{F_2}^{m_2-1}$ are the first $N$ elements in the first row, where $N = \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)\}-1$
+    \[ \{ x_{F_1}x_{F_2}^k, \, 1 \le k \le \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)-1\} .\]
+
+    If we call $\gamma_1, \dots, \gamma_N$ the chains in the decomposition of $p$ then we observe that the exponent of $x_{F_2}$ is equal to the index of the chain:
+    \[ x_{F_1}x_{F_2}^k \longleftrightarrow \gamma_k, \]
+    so exponent of $x_{F_2}$ in the first element of $\gamma_k$ is $k$.
+
+    Now, the first elements of the whole decomposition are obtained by following the procedure described above and considering the first elements of the chains.
+    Take the $k$-th chain of the decomposition, and consider the matrix obtained by multiplying the selected chain by $x_E^i$ and consider the first $N$ elements of the first column, where
+    \[ N = \min \{ (m_1-1)+(m_2-2) - 2(k-1) -1, m_E \}, \]
+    then the elements of the basis are
+    \[ \{ x_{F_1} x_{F_2}^k x_{F_3}^j  \mid 1 \le k \le \min \{ m_1, m_2 \} -1, 0 \le j \le \min \{ (m_1 -1)+(m_2 -2) - 2(k-1), m_E \}-1 \}. \]
+
+    Let us consider the case $N = \{ F_1, \dots, F_k\}$. Then by inductive hypothesis he decomposition of $N^- = \{ F_1, \dots, F_{k-1}\}$ is
+    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k-1}}^{t_{k-1}} \mid 1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1 \}. \]
+
+    !! DA SISTEMARE UN SACCO DI COSE !!
+        
+    So by using the procedure as before we multiply every chain by $x_{F_k}^i$ where $i$ is the index of the row minus one. The number of chains is
+    \[ \min \{ \sum_{1 \le l \le k-1} m_{N^+}(F_l) - 2(i-1), m_{N^+}(F_k) -1 \}, \]
+    but the index $i$ of the row, is equal to the index of the chains, which is equal to the exponent of $x_{F_{k-1}}$. So the contribution of $N$ to the basis are
+    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k}}^{t_k} \mid 1 \le j \le k, \,  1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1 \}. \]
+    Next we add $x_E$. We multiply every chain for $x_E^{i-1}$, then the number of chains of the new matrix is
+    \[ \min \{ \sum_{1 \le l \le k-1} m_{N^+}(F_l) - 2(i-1), m_{N^+}(E)\} -1 \]
+    so the base is 
+    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k}}^{t_k} x_E^{t_E} \mid 1 \le j \le k, \,  1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1, \, 0 \le t_E \le \min \{ \sum_{1 \le l \le k} m_{N^+}(F_l) - 2(t_k-1), m_{N^+}(E)\} -1 \}. \]
+     
+    \section{Decomposition of $A^k$}
+    We use now to above results to decompose $A^k$.
     
 	%STAMPA DELLA BIBLIOGRAFIA
 	\printbibliography[title=References and Bibliography]
