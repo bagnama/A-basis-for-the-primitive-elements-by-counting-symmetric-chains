@@ -502,7 +502,7 @@ style=alphabetic,
         \[ 0 \le k_E \le m_{N^+}(E)- 1.\]
 
         Since we need to construct matrices we establish here some notation.
-        Given a chain $\gamma$ in $FY$, an element $F \in \mathcal{L}$ and $k \in \mathbb{N} \setminus \{0\}$, we define the matrix
+        Given a chain $\gamma$ in $FY$, an element $F \in \mathcal{L} \setminus \{E\}$ and $k \in \mathbb{N} \setminus \{0\}$, we define the matrix
         \[ M^{\gamma}_{F, k} = 
         \begin{bmatrix}
          \gamma \cdot x_F \\
@@ -510,7 +510,11 @@ style=alphabetic,
          \vdots \\
          \gamma \cdot x_F^{k-1}
         \end{bmatrix}  \]
-        and
+        explicitly
+        \[ M^{\gamma_i}_{F, k}(i,j) = \gamma(j)x_F^{i}\]
+        for $1 \le i \le k-1$ and $ 1 \le j \le L(\gamma)$;
+        
+        and the matrix
         \[ M^{\gamma}_{E, k} = 
             \begin{bmatrix}
              \gamma \\
@@ -519,7 +523,10 @@ style=alphabetic,
              \vdots \\
              \gamma \cdot x_E^{k-1}
             \end{bmatrix}  \]
-
+        explicitly
+        \[ M^{\gamma_i}_{E, k}(i,j) = \gamma(j)x_E^{i}\]
+        for $0 \le i \le k-1$ and $ 1 \le j \le L(\gamma)$;
+        
         Consider a nested set $N = \{ F_1, \dots, F_l\}$ such that $N^+$ is in the image of $supp_+$. We want to apply the recursive method discussed in section \ref{SEC1} to obtain a symmetric chain decomposition of $supp_+^{-1}(N^+)$.
         
         \begin{rmk}
@@ -796,7 +803,7 @@ style=alphabetic,
 \item[$N=\{F_1, F_2\}$] We consider now the case $N=\{F_1, F_2 \}$.
     \begin{prop}
         If $N = \{F_1, F_2 \}$, then
-        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})= \min\{m_1, m_2\} -1.\]
+        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1}))= \min\{m_1, m_2\} -1.\]
     \end{prop}
 
     \begin{proof}
@@ -804,52 +811,76 @@ style=alphabetic,
         \[ M^\gamma_{F_2, m_2}\]
         where $\gamma$ is the only chain in the decomposition of $D(x_{F_1}^{m_1-1})$.
         In this matrix the number of rows is $m_2-1$, the number of columns is $m_1-1$, therefore
-        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})= \min\{m_1, m_2\} -1. \]
+        \[ SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1}))= \min\{m_1, m_2\} -1. \]
     \end{proof}
 
     To proceed in computing 
-    \[ SC(supp_+^{-1}(N^+)\]
+    \[ SC(supp_+^{-1}(N^+) = SC(D(x_{F_1}^{m_1 -1}x_{F_2}^{m_2 -1}x_{E}^{m_E -1}))\]
     we need to compute also the length of the chains in the decomposition of $D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1})$.
 
-    \begin{lem}
-        
+    \begin{lem} \label{lem:F_1F_2}
+        Let $N=\{F_1, F_2 \}$, call $K = SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1}))$ and the chains in the decomposition as 
+        \[ \gamma_1, \dots, \gamma_K \]
+        then the length in the chains are
+        \[ L(\gamma_1) = m_1 + m_2 - 3;\]
+        \[ L(\gamma_i) = L(\gamma_1) -2(i-1):\]
+        for $1 \le i \le K$ and with $\gamma_1$ the outermost chain, and $\gamma_K$ the innermost.
     \end{lem}
     
+    \begin{proof}
+        Consider $\bar\gamma$ the only chain in the decomposition of $D(x_1^{m_1-1})$, then construct the matrix
+        \[ M_{F_2, m_2}^{\bar\gamma}. \]
+        The length of the first row is $m_1 -1$ and the length of the last column, excluded the first element, is $m_2 -2$, so
+        \[ L(\gamma_1) = m_1 - 1 + m_2 - 2 = m_1 + m_2 - 3.\]
+        Every time I take an inner chain I am reducing the length by $2$ so
+        \[ L(\gamma_i) = L(\gamma_1) - 2(i-1).\]
+    \end{proof}
     
+        Defined $K$ and $\gamma_i$ with $1 \le i \le K$ as in Lemma \ref{lem:F_1F_2}, we can compute now the matrix
+        \[ M^{\gamma_i}_{E, m_E} \]
+        fore every $1 \le i \le K$, and count the number of chains in every matrix.
 
-    \begin{rmk}
-        In the case we consider $\{F_1, F_2\}$, then the previous result is
-        \[ L(\gamma_1) = (m_1 - 1) + (m_2 - 2) \]
-        \[ L(\gamma_i) = L(\gamma_1) - 2(i-1).\]
-    \end{rmk}
+        \begin{enumerate}
+            \item[i$=1$:] to compute the number of chains in $M^{\gamma_i}_{E, m_E}$ we observe that the number of row in equal to the length of $\gamma_1$ and then number of column is $m_E$, so the number of chains is
+            \[ N_1 = \min \{ m_1 + m_2 -3, m_E\}.\]
 
-    \end{enumerate}
-    We now proceed with the case $N = \{ F_1, F_2\}$. In this case $N^+ = \{F_1, F_2, E\}$, and by the privious two proposition we have that the number of chains in the decomposition of $x_1^{m_1 -1} x_{F_2}^{m_2-1}$ is 
-    \[ N = \min\{m_{N^+}(F_1), m_{N^+}(F_2)\} - 1.\]
-    We call these chains $\gamma_1, \dots, \gamma_N$, their length is given by 
-            \[ L(\gamma_1) = (m_1 - 1) + (m_2 - 2) \]
-        \[ L(\gamma_i) = L(\gamma_1) - 2(i-1).\]
+            \item[$i=2$:] in this case the number of row is equal to the length of $\gamma_2$ that is 
+            \[ L(\gamma_2) = L(\gamma_1) - 2 = m_1 + m_2 -3 -2 = m_1 + m_2 - 5, \]
+            and the number of column is $m_E$.
+            So the number of chains is
+            \[ \min \{ m_1 +m_2 - 5, m_E \}. \]
+
+            \item[$i>2$:] we can generalize by observing that the number of chains in a matrix is the minimum between the number of rows and the number of column.
+            So 
+            \[N_i = \min \{ m_1 + m_2 - 2i -1  , m_E \}. \]
+        \end{enumerate}
+
+        So in the end we have the theorem
+        \begin{thm}
+            Consider $N=\{F_1, F_2 \}$, let $K = SC(D(x_{F_1}^{m_1-1}x_{F_2}^{m_2-1}))$ and $\gamma_1, \dots, \gamma_K$ the chains of the decomposition of $SC(D(x_{F_1}^{m_1-1} x_{F_2}^{m_2-1}))$. Then for $1 \le i \le K$, the number of chains in 
+            \[ M^{\gamma_i}_{E, m_E}\]
+            is equal to $N_i = \min \{ m_1 + m_2 - 2i -1, m_E \}$,
+            and called its chains $\phi^i_{1}, \dots, \phi^i_{N_i}$, their length are
+            \[ L(\phi^i_{N_i}) = m_1 + m_2 + m_E - 2i -1. \]
+        \end{thm}
+
+    \item[$N=\{F_1, \dots, F_l\}$] Consider now the general case $N = \{F_1,\dots, F_l\}$, and define
+    \[ K = SC(D(x_{F_1}^{m_1-1}\cdots x_{F_{l-1}}^{m_{l-1}-1}))\]
+    and $\gamma_1, \dots, \gamma_K$ the chains in the decomposition of $D(x_{F_1}^{m_1-1}\cdots x_{F_{l-1}}^{m_{l-1}-1})$.
+    Suppose that the length of this chains are
+    \[ L(\gamma_i) = m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1) -1,\]
+    for $1 \le i \le K$.
+    Then for all $1 \le i \le K$, we construct the matrix
+    \[ M^{\gamma_i}_{F_l, m_l}.\]
+    By hypothesis the number of column is $m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1) -1$ and the number of rows is $m_l -1$, so the number of chains in $M^{\gamma_i}_{F_l, m_l}$ is
+    \[ N_i = \min \{ m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1), m_l \} -1.\]
+    Now we compute the length of these chains. The number of elements in the first chains is the number of element in the first row added to the number of elements in the last column, except the first element, so in $M^{\gamma_1}_{F_l, m_l}$
+    \[ L(\phi^{1}_1) = m_1 + \dots + m_{l-1} - 2(l-2) -1 + (m_l -2) = m_1 + \dots + m_{l} - 2(l-1) -1\]
         
-    Now for every $1\le i \le N$, we construct the matrix $M(\gamma_i)$ where 
-    \[ M(\gamma_i)(j,k) = \gamma(k)x_E^{j-1}\]
-    for $ 1 \le k \le m_1-1$ and $1 \le j \le m_E$.
+    
+    \end{enumerate}
 
-    We want to compute the number of chains in every $M(\gamma_i)$ and their length.
-    We start with $M(\gamma_1)$: the length of the first row is $(m_1 - 1) + (m_2 - 2)$ and the number of row is $m_E$, so as previously in the case $N^+ = \{F_1, E\}$, we have
-    \[ N_1 = \min \{ m_1 + m_2 - 3, m_E \}.\]
-    The lenght of the second chain is $L(\gamma_1) - 2$, so the number of chain in $M(\gamma_2)$ is 
-    \[ N_2 = \min \{ m_1+m_2 - 3 -2, m_E \}, \]
-    generalizing
-    \[ N_i = \min \{ m_1 + m_2 - 2(i-1) - 1, m_E\}\]
-    Calling the chains of $M(\gamma_1)$ $\phi^1_1, \dots, \phi^1_{N_1}$ then we have that
-    \[ L(\phi^1_1) = L(\gamma_1) + (m_E-1) = (m_1 - 1) + (m_2 -2) + (m_E -1)\]
-    for every other chain we diminish the length by 2, so
-    \[ L(\phi^1_i) = L(\gamma_1) - 2(i-1). \]
-    Considering the chains $\phi^2_1, \dots, \phi_{N_2}^2$ of $M(\gamma_2)$, we have that
-    \[ L(\phi_{1}^2) = L(\gamma_2) + (m_E -1) = L(\gamma_1) - 2 + (m_E -1) = (m_1 -1) + (m_2 -2) - 2 + (m_E -1) = L(\phi_1^1) -2. \]
-    Generalizing 
-    \[ L(\phi^2_{k}) = L(\phi^2_1) - 2(k-1).\]
-
+\newpage
 
     \section{Primitive Elements}
 
