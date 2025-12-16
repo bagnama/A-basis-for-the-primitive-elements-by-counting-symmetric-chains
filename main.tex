@@ -642,19 +642,109 @@ style=alphabetic,
                 \[ M^{\gamma^l_i}_{E, m_E}.\]
                 The chains are constructed by considering the layers of the matrix as before.
     \end{enumerate}
+
+    \subsection{Counting symmetric chains in a chain matrix}
+    Consider a chain $\gamma$, $F \in \mathcal{L} \setminus \{E\}$ and $k > 0$. Then the aim is to count the number of symmetric chains obtainable by the matrix
+    \[ M^{\gamma}_{F, k}.\]
+
+    We have three cases:
+    \begin{enumerate}
+        \item[$L(\gamma) = k-1$:] in this case the number of rows and the number of columns of the chain matrix are equal.
+
+        \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
+                    \matrix [mymatrix,text width=0.6em,align=center] (m) {
+                        \gamma(1) x_F & \gamma(2) x_F &\dots & \gamma(k-2) x_F  & \gamma(k-1) x_F\\
+                        
+                        \gamma(1) x_F^2 & \gamma(2) x_F^2 &\dots & \gamma(k-2) x_F^2  & \gamma(k-1) x_F^2\\
+                        
+                        \vdots & \vdots & \cdots & \vdots & \vdots \\
+                        
+                        \gamma(1) x_F^{k-2} & \gamma(2) x_F^{k-2} &\dots & \gamma(k-2) x_F^{k-2}  & \gamma(k-1) x_F^{k-2}\\
+                        
+                       \gamma(1) x_F^{k-1} & \gamma(2) x_F^{k-1} &\dots & \gamma(k-2) x_F^{k-1}  & \gamma(k-1) x_F^{k-1}\\};
+                    
+                    \pgfmathsetmacro{\offset}{0.5mm}
+                        \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-5.north east) -- ([xshift=1.7cm]m-5-5.south east) -- (m-5-5.south west) -- ([yshift=0.1cm]m-1-5.south west) -- (m-1-1.south west) -- cycle;
+        
+                        \draw [thick, blue, rounded corners=1mm] (m-2-1.north west) -- ([xshift=1.65cm]m-2-4.north east) -- ([xshift=1.65cm]m-5-4.south east) -- (m-5-4.south west) -- (m-2-4.south west) -- (m-2-1.south west) -- cycle;
+
+                        \draw[thick, purple, rounded corners=1mm] (m-4-1.north west) -- ([xshift=1.7cm]m-4-2.north east) -- ([xshift=1.7cm]m-5-2.south east) -- (m-5-2.south west) -- ([yshift=0.5mm]m-4-2.south west) -- ([yshift=0.5mm]m-4-1.south west) -- cycle;
+
+                        \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-5-1.north west) -- ([xshift=1.65cm]m-5-1.north east) -- ([xshift=1.65cm]m-5-1.south east) -- ([yshift=-0.5mm]m-5-1.south west) -- cycle;
+        \end{tikzpicture} \end{center}
+
+        Therefore the number of chains is equal to the number of rows or columns
+        \[ L(\gamma) = k-1.\]
+        
+        
+        \item[$L(\gamma) \ge k$:] in this case the matrix is horizontal. Called $l = L(\gamma)$:
+        \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
+                    \matrix [mymatrix,text width=0.6em,align=center] (m) { 
+
+                        \gamma(1) x_F &  \dots & \gamma(l - k +2) x_F & \dots  & \gamma(l) x_F\\
+                        
+                        \vdots &  & \vdots &  & \vdots \\
+                        
+                        \gamma(1) x_F^{k-2} & \cdots & \gamma(l-k+2) x_F^{k-2} & \dots & \gamma(l) x_F^{k-2} \\
+                        
+                        \gamma(1) x_F^{k-1} & \cdots & \gamma(l-k+2) x_F^{k-1} & \dots & \gamma(l) x_F^{k-1} \\};
+                    
+                    \pgfmathsetmacro{\offset}{0.5mm}
+                        \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-5.north east) -- ([xshift=1.7cm]m-4-5.south east) -- (m-4-5.south west) -- ([yshift=0.1cm]m-1-5.south west) -- (m-1-1.south west) -- cycle;
+
+                        \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-4-1.north west) -- ([xshift=2cm]m-4-3.north east) -- ([xshift=2cm]m-4-3.south east) -- ([yshift=-0.5mm]m-4-1.south west) -- cycle;
+                \end{tikzpicture} \end{center}
+            So the number of chains is equal to the number of rows, which is
+            \[ k-1.\]
+
+            \item[$L(\gamma) < k-1$:] in this case the matrix is vertical. Called $l = L(\gamma)$:
+
+                \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
+                    \matrix [mymatrix,text width=0.6em,align=center] (m) {
+                        
+                        \gamma(1) x_F & \gamma(2) x_F & \gamma(3) x_F &\dots  & \gamma(l) x_F\\
+                        
+                        \vdots & \vdots & \vdots & & \vdots \\
+
+                        \gamma(1) x_F^{l-2} & \gamma(2) x_F^{l-2} & \gamma(3) x_F^{l-2} &\dots  & \gamma(l) x_F^{l-2} \\
+                        
+                        \vdots & \vdots & \vdots & & \vdots \\
+                        
+                        \gamma(1) x_F^{k-1} & \gamma(2) x_F^{k-1} & \gamma(3) x_F^{k-1} &\dots  & \gamma(l) x_F^{k-1} \\};
+                    
+                    \pgfmathsetmacro{\offset}{0.5mm}
+                        \draw [thick,red,rounded corners=1mm] (m-1-1.north west) -- ([xshift=1.7cm]m-1-5.north east) -- ([xshift=1.7cm]m-5-5.south east) -- (m-5-5.south west) -- ([yshift=0.1cm]m-1-5.south west) -- (m-1-1.south west) -- cycle;
+                        
+                        \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-3-1.north west) -- ([xshift=1.65cm]m-3-1.north east) -- ([xshift=1.65cm]m-5-1.south east) -- ([yshift=-0.5mm]m-5-1.south west) -- cycle;
+                \end{tikzpicture} \end{center}
+
+                Therefore in this case the number of chains is equal to the number of columns, which is
+                \[ L(\gamma).\]
+    \end{enumerate}
+
+    So in the end we proved the following
+    \begin{thm}[Number of chain in a chain matrix]
+        Let $\gamma$ be a chain and $F \in \mathcal{L}\setminus \{E\}$. Consider $k > 0$, then the number of chain in the chain matrix $M^{\gamma}_{F, k}$ is 
+        \[ \min \{ L(\gamma), k-1 \} \]
+    \end{thm}
+
+    By following an analogous argument follows also the following theorem.
+    \begin{thm}[Number of chain in a final chain matrix]
+        Let $\gamma$ be a chain. Consider $k > 0$, then the number of chain in the chain matrix $M^{\gamma}_{E, k}$ is 
+        \[ \min \{ L(\gamma), k \} \]
+    \end{thm}
     
-    \subsection{Counting the symmetric chains in the fibers}
-    Here we want to count the number of chains in the decomposition of a fiber and their length.
-    We first proceed by computing the case $N = \{F_1 \}$ and $N=\{F_1, F_2 \}$, then we generalize the results.
     Consider the symmetric chain decomposition of a poset $\mathcal{P}$, then we define
     \[ SC(\mathcal{P}) = \# \{ \text{ chains in the decomposition of $\mathcal{P}$} \} \]
-    \begin{enumerate} 
-        \item[$N=\{F_1\}$] We start by considering the most simple case $N=\{F_1\}$, and so $N^+=\{F_1, E\}$.
-        
+    
+    \subsection{Case $N=\{F_1\}$}
+    In this example we redo all the process described previously for the case $N=\{F_1\}$, and so $N^+=\{F_1, E\}$.
     \begin{prop} \label{prop:n_chain_E}
         If $N=\{F_1\}$ then the number of symmetric chains in the decomposition of $supp_+^{-1}(N^+)$ is
         \[ SC(supp_+^{-1}(N^+)) = \min\{ m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
     \end{prop}
+        
+        
     
     \begin{proof} 
         Consider $\gamma$ the only chain in the decomposition of $D(x_1^{m_1-1})$.
@@ -740,6 +830,59 @@ style=alphabetic,
         \[ SC(supp_+^{-1}(N^+)) = \min\{m_{N^+}(F_1) -1, m_{N^+}(E)\}.\]
     \end{proof}
 
+
+    \subsection{Computing the length of the chains}
+    Consider a chain $\gamma$, an element $F \in \mathcal{L}\setminus\{E\}$ and $k > 0$. Consider the chain matrix
+    \[ M^{\gamma}_{F,k},\]
+    we want to compute the length of the chains in the matrix.
+    \begin{notat*}
+        Denote with $l = L(\gamma)$ the length of $\gamma$.
+    \end{notat*}
+
+    Assign a name to the chains in the following way
+            \begin{center} \begin{tikzpicture}[baseline=0cm,mymatrixenv]
+                    \matrix [mymatrix,text width=0.6em,align=center] (m) {
+                        \gamma_1 : & \gamma(1) x_F & \gamma(2) x_F &\dots & \gamma(l-2) x_F  & \gamma(l-1) x_F\\
+                        
+                        \gamma_2: & \gamma(1) x_F^2 & \gamma(2) x_F^2 &\dots & \gamma(l-2) x_F^2  & \gamma(l-1) x_F^2 \\
+                        
+                        \vdots & \vdots & \vdots & & \vdots & \vdots \\
+                        
+                        \gamma_{k-2}:& \gamma(1) x_F^{k-2} & \gamma(2) x_F^{k-2} &\dots & \gamma(l-2) x_F^{k-2}  & \gamma(l-1) x_F^{k-2} \\
+                        
+                        \gamma_{k-1}: & \gamma(1) x_F^{k-1} & \gamma(2) x_F^{k-1} &\dots & \gamma(l-2) x_F^{k-1}  & \gamma(l-1) x_F^{k-1} \\};
+                    
+                    \pgfmathsetmacro{\offset}{0.5mm}
+                        \draw [thick,red,rounded corners=1mm] (m-1-2.north west) -- ([xshift=1.7cm]m-1-6.north east) -- ([xshift=1.7cm]m-5-6.south east) -- (m-5-6.south west) -- ([yshift=0.1cm]m-1-6.south west) -- (m-1-2.south west) -- cycle;
+        
+                        \draw [thick, blue, rounded corners=1mm] (m-2-2.north west) -- ([xshift=1.65cm]m-2-5.north east) -- ([xshift=1.65cm]m-5-5.south east) -- (m-5-5.south west) -- (m-2-5.south west) -- (m-2-2.south west) -- cycle;
+
+                        \draw[thick, purple, rounded corners=1mm] (m-4-2.north west) -- ([xshift=1.7cm]m-4-3.north east) -- ([xshift=1.7cm]m-5-3.south east) -- (m-5-3.south west) -- ([yshift=0.5mm]m-4-3.south west) -- ([yshift=0.5mm]m-4-2.south west) -- cycle;
+
+                        \draw [thick, green, rounded corners=1mm] ([yshift=-0.5mm]m-5-2.north west) -- ([xshift=1.65cm]m-5-2.north east) -- ([xshift=1.65cm]m-5-2.south east) -- ([yshift=-0.5mm]m-5-2.south west) -- cycle;
+                \end{tikzpicture} \end{center}
+
+    So the length of $\gamma_1$ is 
+    \[ l + (k-2)\]
+    where $l$ is the number of elements in the first row, and $k-2$ is the number of elements in the last column, except for the first element.
+
+    Every time we increase the index of the chain by one, we are diminishing the length of the chain by $2$. So
+    \[ L(\gamma_i) = L(\gamma_1) - 2(i-1),\]
+    for $i \ge 2$.
+    Finally we have
+    \[ L(\gamma_i) = l + (k-2) - 2(i-1)\]
+    for all $i \ge 1$.
+
+    By applying the analogous argument with the final chain $m^{\gamma}_{E, k}$ we obtain the following theorem.
+    \begin{thm}
+        Consider a chain $\gamma$, with $l = L(\gamma)$, $F\in \mathcal{L} \setminus \{E\}$ and $k > 0$. Then the length of the chain in $M^{\gamma}_{F,k}$ are
+        \[ L(\gamma_i) = l + (k-2) - 2(i-1);\]
+        and the length of the chains in $M^{\gamma}_{E,k}$ are
+        \[ L(\gamma_i) = l + (k-1) -2(i-1).\]
+    \end{thm}
+
+    \subsection{Case $N= \{F_1 \}$ and $N=\{ F_1, F_2\}$}
+    
     We give here a Lemma to compute also the length o the chains in the decomposition of $supp_+^{-1}(N^+)$.
     \begin{lem} \label{lem:lengthF_1}
         If $N=\{F_1\}$, define 
@@ -864,21 +1007,27 @@ style=alphabetic,
             \[ L(\phi^i_{N_i}) = m_1 + m_2 + m_E - 2i -1. \]
         \end{thm}
 
-    \item[$N=\{F_1, \dots, F_l\}$] Consider now the general case $N = \{F_1,\dots, F_l\}$, and define
+Consider now the general case $N = \{F_1,\dots, F_l\}$, and define
     \[ K = SC(D(x_{F_1}^{m_1-1}\cdots x_{F_{l-1}}^{m_{l-1}-1}))\]
     and $\gamma_1, \dots, \gamma_K$ the chains in the decomposition of $D(x_{F_1}^{m_1-1}\cdots x_{F_{l-1}}^{m_{l-1}-1})$.
     Suppose that the length of this chains are
-    \[ L(\gamma_i) = m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1) -1,\]
+    \[ L(\gamma_i) = m_1 + \dots + m_{l-1} - 2(l-2) -1 - 2(i -1),\]
     for $1 \le i \le K$.
     Then for all $1 \le i \le K$, we construct the matrix
     \[ M^{\gamma_i}_{F_l, m_l}.\]
-    By hypothesis the number of column is $m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1) -1$ and the number of rows is $m_l -1$, so the number of chains in $M^{\gamma_i}_{F_l, m_l}$ is
-    \[ N_i = \min \{ m_1 + \dots + m_{l-1} - 2(l-2) + 2(i -1), m_l \} -1.\]
-    Now we compute the length of these chains. The number of elements in the first chains is the number of element in the first row added to the number of elements in the last column, except the first element, so in $M^{\gamma_1}_{F_l, m_l}$
-    \[ L(\phi^{1}_1) = m_1 + \dots + m_{l-1} - 2(l-2) -1 + (m_l -2) = m_1 + \dots + m_{l} - 2(l-1) -1\]
-        
+    By hypothesis the number of column is $m_1 + \dots + m_{l-1} - 2(l-2) -1 - 2(i -1)$ and the number of rows is $m_l -1$, so the number of chains in $M^{\gamma_i}_{F_l, m_l}$ is
+    \[ N_i = \min \{ m_1 + \dots + m_{l-1} - 2(l-2) - 2(i -1), m_l \} -1.\]
     
-    \end{enumerate}
+    Now we compute the length of these chains. The number of elements in the first chains is the number of element in the first row added to the number of elements in the last column, except the first element, so in $M^{\gamma_1}_{F_l, m_l}$
+    \[ L(\phi^{1}_1) = m_1 + \dots + m_{l-1} - 2(l-2) -1 + (m_l -2) = m_1 + \dots + m_{l} - 2(l-1) -1.\]
+    The length of the second chain is
+    \[ L(\phi_2^1) = L(\phi^1_1) -2 = m_1 + \dots + m_{l} - 2(l-1) -1 -2. \]
+    Therefore, in general we have
+    \[ L(\phi_i^1) = L(\phi^1_1) - 2(i-1) = m_1 + \dots + m_{l} - 2(l-1) -1 -2(i-1). \]
+
+    Consider now the chain $\gamma_j$, then 
+    \[ L(\phi^s_1) = m_1 + \dots + m_{l} - 2(l-1) -1 -2(i-1)\]
+        
 
 \newpage
 
@@ -990,39 +1139,74 @@ style=alphabetic,
 
     \subsection{A basis for primitive elements}
 
-    Let's start with the most simple case: $N^+=\{F_1, E\}$. Then the chains are obtained by the procedure exposed in previous sections.
-    By the previous theorem the primitive elements are all the first elements of the chains.
-    The number of this elements is equal to the number of chains in the decomposition, and these elements are the first $N$ elements of the first column, where $N$ is the number of chains.
-    But $N= \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)\}$, so the nested sets of the type $N^+=\{F_1, E\}$, contribute to the basis with the elements
-    \[ \{ x_{F_1}x_E^k \mid 0 \le k \le \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)-1\} \}. \]
+    To construct the base for $P^k$ we proceed step by step.
 
-    Consider now the nested set $N^+ = \{ F_1, F_2, E\}$. The first elements of the chains in the decomposition of $p=x_{F_1}^{m_1-1} x_{F_2}^{m_2-1}$ are the first $N$ elements in the first row, where $N = \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)\}-1$
-    \[ \{ x_{F_1}x_{F_2}^k, \, 1 \le k \le \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)-1\} .\]
+    \begin{enumerate}
+        \item[$N^+=\{F_1, E\}$:]By the previous theorem the primitive elements are all the first elements of the chains.
 
-    If we call $\gamma_1, \dots, \gamma_N$ the chains in the decomposition of $p$ then we observe that the exponent of $x_{F_2}$ is equal to the index of the chain:
-    \[ x_{F_1}x_{F_2}^k \longleftrightarrow \gamma_k, \]
-    so exponent of $x_{F_2}$ in the first element of $\gamma_k$ is $k$.
-
-    Now, the first elements of the whole decomposition are obtained by following the procedure described above and considering the first elements of the chains.
-    Take the $k$-th chain of the decomposition, and consider the matrix obtained by multiplying the selected chain by $x_E^i$ and consider the first $N$ elements of the first column, where
-    \[ N = \min \{ (m_1-1)+(m_2-2) - 2(k-1) -1, m_E \}, \]
-    then the elements of the basis are
-    \[ \{ x_{F_1} x_{F_2}^k x_{F_3}^j  \mid 1 \le k \le \min \{ m_1, m_2 \} -1, 0 \le j \le \min \{ (m_1 -1)+(m_2 -2) - 2(k-1), m_E \}-1 \}. \]
-
-    Let us consider the case $N = \{ F_1, \dots, F_k\}$. Then by inductive hypothesis he decomposition of $N^- = \{ F_1, \dots, F_{k-1}\}$ is
-    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k-1}}^{t_{k-1}} \mid 1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1 \}. \]
-
-    !! DA SISTEMARE UN SACCO DI COSE !!
+        The number of this elements is equal to the number of chains in the decomposition, which is equal to
+        \[ N = \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)\} \]
         
-    So by using the procedure as before we multiply every chain by $x_{F_k}^i$ where $i$ is the index of the row minus one. The number of chains is
-    \[ \min \{ \sum_{1 \le l \le k-1} m_{N^+}(F_l) - 2(i-1), m_{N^+}(F_k) -1 \}, \]
-    but the index $i$ of the row, is equal to the index of the chains, which is equal to the exponent of $x_{F_{k-1}}$. So the contribution of $N$ to the basis are
-    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k}}^{t_k} \mid 1 \le j \le k, \,  1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1 \}. \]
-    Next we add $x_E$. We multiply every chain for $x_E^{i-1}$, then the number of chains of the new matrix is
-    \[ \min \{ \sum_{1 \le l \le k-1} m_{N^+}(F_l) - 2(i-1), m_{N^+}(E)\} -1 \]
-    so the base is 
-    \[ \{ x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{k}}^{t_k} x_E^{t_E} \mid 1 \le j \le k, \,  1 \le t_j \le \min \{\sum_{1 \le l \le j-1} m_{N^+}(F_l) - 2 (t_{j-1} -1), m_{N^+}(F_{j-1})\}-1, \, 0 \le t_E \le \min \{ \sum_{1 \le l \le k} m_{N^+}(F_l) - 2(t_k-1), m_{N^+}(E)\} -1 \}. \]
-     
+        Therefore, the nested sets of the type $N^+=\{F_1, E\}$, contribute to the basis with the elements
+        \[ \{ x_{F_1}x_E^k \mid 0 \le k \le \min \{m_{N ^+}(F_1) -1, m_{N^+}(E)-1\} \}. \]
+
+        \item[$N^+ = \{ F_1, F_2, E\}$:] in this case the we first compute the first elements of the chains in $D(x_{F_1}^{m_1-1} x_{F_2}^{m_2-1})$.
+        The number of chains in $M^\gamma_{F_2, m_2}$, where $\gamma$ is the only chain in the decomposition of $x_{F_1}^{m_1-1}$ is 
+        $N _1 = \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)\}-1$, so the first elements of these chains are
+        \[ \{ x_{F_1}x_{F_2}^k, \, 1 \le k \le \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)-1\} .\]
+        If we call $\gamma_1, \gamma_2, \dots, \gamma_{N_1}$ the chains in the decomposition of $x_{F_1}^{m_1-1} x_{F_2}^{m_2-1}$, then we observe that the exponent of $x_{F_2}$ is in correspondence to the index of the chain:
+        \[ x_{F_1}x_{F_2}^k \longleftrightarrow \gamma_k, \]
+        so exponent of $x_{F_2}$ in the first element of $\gamma_k$ is $k$.
+    
+        Therefore, since for every $1 \le i \le N_1$ we want to construct the matrix
+        \[ M^{\gamma_i}_{E, m_E}\]
+        we have also the correspondence
+        \[ x_{F_1}x_{F_2}^k \longleftrightarrow M^{\gamma_k}_{E, m_E}\]
+
+        So, given $k \in [1; N_1]$, we have that the number of chains in the matrix $M^{\gamma_k}_{E, m_E}$ is 
+        \[ N_E = \min \{ L(\gamma_k), m_E\}, \]
+        where $L(\gamma_k) = m_1 + m_2 - 2(k-1) -1$.
+        Hence the first elements in the chains of this matrix are
+        \[ \{x_{F_1} x_{F_2}^{k} x_{E}^{t}  \mid 0 \le t \le \min \{ m_1 + m_2 - 2k, m_E \} -1\}.\]
+        By letting $k$ ranging in $[1; \min \{ m_{N^+}(F_1) , m_{N^+}(F_2)\}-1]$, we have that the first element of the chains are
+        \[ \{ x_{F_1} x_{F_2}^k x_{E}^t  \mid 1 \le k \le \min \{ m_1, m_2 \} -1, 0 \le t \le \min \{ m_1 + m_2 - 2k, m_E \} -1\}. \]
+
+        \item[$N = \{ F_1, \dots, F_l\}$:]
+        suppose that the first elements of the chains in the decomposition of $D(x_{F_1}^{m_1 -1} \cdots x_{F_{l-1}}^{m_{l-1}-1})$ are
+        \begin{center}
+        $\left \{x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{l-1}}^{t_{l-1}} :
+        \begin{array}{c}
+            1 \le t_2 \le \min \{ m_1, m_2\}-1\\
+            \vdots\\
+            1 \le t_{l-1} \le \min \{ m_1 + \dots + m_{l-2} - 2(l-3) - 2t_{l-2}, m_{l-1}\} -1 \}
+        \end{array} \right \}$
+        \end{center}
+
+        We call $\gamma_1, \dots, \gamma_{N_{l-1}}$ the chain in the decomposition of $D(x_{F_1}^{m_1 -1}) \cdots x_{F_{l-1}}^{m_{l-1}-1})$, then we observe that for every fixed $(k_2, \dots, k_{l-2})$, there exists a correspondence
+        \[ x_{F_1} x_{F_2}^{k_2} \cdots x_{F_{l-2}}^{k_{l-2}} x_{F_{l-1}}^k  \longleftrightarrow \gamma_k \longleftrightarrow M^{\gamma_k}_{F_l, m_l}.\]
+        Therefore, by choosing $k \in [1, N_{l-1}]$ we are choosing a chain $\gamma_k$ with which we will construct the matrix of chains
+        \[ M^{\gamma_k}_{F_l, m_l}.\]
+        In this matrix we construct the chains as before and the number of chains is
+        \[ \min \{ L(\gamma_k), m_{l} \} -1, \]
+        where by inductive hypothesis $L(\gamma_k) = m_1 + m_2 + \dots + m_{l-1} - 2(l-2) -2(k-1) -1$, so the number of chains is
+        \[ \min \{ m_1 + m_2 + \dots + m_{l-1} - 2(l-2) -2(k-1) , m_l \} -1. \]
+        By letting $k$ ranging in $[1, N_{l-1}]$, then the first elements of the chains are
+        \[
+        \{x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{l}}^{t_l} :
+            1 \le t_k \le \min \{ m_1 + \dots + m_{k-1} - 2(k-2) - 2(t_{k-1}-1), m_k\} -1 \}\]
+        The last step is to add the element $E$. As before, for $k \in [1, N_l]$ we are choosing the chain $\gamma_k$ to work with. So we can construct the matrix $M^{\gamma_k}_{E, m_E}$, and construct the chains. The number of chains is 
+        \[ N_E = \min \{ m_1 + \dots + m_l - 2(l-1) - 2(k-1) -1, m_E \},\]
+        so the first element of the chains are
+        \begin{center}
+        $\left \{x_{F_1} x_{F_2}^{t_2} \cdots x_{F_{l}}^{t_l} x_E^{t_E} :
+        \begin{array}{c}
+            1 \le t_k \le \min \{ m_1 + \dots + m_{k-1} - 2(k-2) - 2(t_{k-1}-1), m_k\} -1 \\
+            0 \le t_E \le \min \{ m_1 + \dots + m_l - 2(l-1) - 2(t_l-1), m_E \} -1
+        \end{array} \right \}$
+        \end{center}
+        
+    \end{enumerate}
+    
     \section{Decomposition of $A^k$}
     We use now to above results to decompose $A^k$.
     
