@@ -1,4 +1,4 @@
-# A basis for the primitive elements by counting symmetric chains
+## A basis for the primitive elements by counting symmetric chains
 
 Consider a simple matroid $$\mathcal{M}$$, and let 
 ```math
