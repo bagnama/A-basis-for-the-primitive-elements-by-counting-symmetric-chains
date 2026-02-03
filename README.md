@@ -33,7 +33,7 @@ Angarone, Nathanson and Reiner decomposed $FY$ with the fibers of a support func
 ```math
     supp^+ : FY \longrightarrow  \mathcal{N}(\mathcal{L}, \mathcal{G})
 ```
-defined by $$supp^+ (x_{F_1}^{m_1} x_{F_2}^{m_2} \cdots x_{F_l}^{m_l}) = \\{ F_{1}, F_{2}, \dots, F_{l}, E \\}$$, where we call $$N^+ = \\{ F_1, \dots, F_l, E \\}$$, and by using symmetric chain decomposition on the fibers they decompose $$FY$ with symmetric chains. Then they defined a Lefschetz operator $\lambda$, acting on the chains of the decomposition sending an element of the chain in the next one. This map provides injections $\lambda : FY^k \hookrightarrow FY^{k+1}$.
+defined by $$supp^+ (x_{F_1}^{m_1} x_{F_2}^{m_2} \cdots x_{F_l}^{m_l}) = \\{ F_{1}, F_{2}, \dots, F_{l}, E \\}$$, where we call $$N^+ = \\{ F_1, \dots, F_l, E \\}$$, and by using symmetric chain decomposition on the fibers they decompose $$FY$$ with symmetric chains. Then they defined a Lefschetz operator $\lambda$, acting on the chains of the decomposition sending an element of the chain in the next one. This map provides injections $\lambda : FY^k \hookrightarrow FY^{k+1}$.
     
 The goal of this work is to define primitive elements for the $\lambda$ map and find a basis for them. In the first chapter we introduce symmetric chain decomposition of a poset and a recursive method to construct them and we apply this method to fibers of the extended support function, and provide some results and examples to count the number and the lengths of the chains in the symmetric chain decomposition of a fiber.
 In the second chapter we introduce primitive elements for $\lambda$ and we provide a basis for them by proving that the set of primitive elemnts  $$B$$ can be described by
