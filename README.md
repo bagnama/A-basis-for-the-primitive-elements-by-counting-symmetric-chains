@@ -2,7 +2,7 @@
 
 Consider a simple matroid $$\mathcal{M}$$, and let 
 ```math
-\mathcal{L} = \mathcal{L}_{\mathcal{M}}$$ its lattice of flats. Consider $\mathcal{G} \subset \mathcal{L}
+\mathcal{L} = \mathcal{L}_{\mathcal{M}}
 ```math
 its lattice of flats. Consider $\mathcal{G} \subset \mathcal{L}$ containing $E$ a building set, and define $\mathcal{N}(\mathcal{L}, \mathcal{G})$ as the set of $\mathcal{G}$-nested sets.
     The Chow ring $\mathcal{A}(\mathcal{L}, \mathcal{G})$ is defined as
