@@ -1,3 +1,3 @@
 # A basis for the primitive elements by counting symmetric chains
 
-$ x^2 + 1 $
+$x^2 + 1$
