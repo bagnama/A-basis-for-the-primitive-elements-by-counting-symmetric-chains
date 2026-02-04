@@ -42,10 +42,10 @@ In the second chapter we introduce primitive elements for $\lambda$ and we provi
 ```
 where
 ```math
-    B(N^+) := \left \\{ \begin{matrix}
+    B(N^+) := \left \{ \begin{matrix}
                            & \forall i \in \{1, \dots, l\}\\
                            x_{F_1} x_{F_2}^{t_2} \cdots x_{F_l}^{t_l} x_E^{t_E} \, : \, &  1 \le t_i \le \min \{ \sum_{k=1}^{i-1} m_k - 2\sum_{k=2}^{i-1}t_k, m_i\} -1 \\
                            & 0 \le t_E \le \min \{ \sum_{k=1}^l m_k - 2\sum_{k=2}^l t_k, m_E \} -1  \\
-                       \end{matrix} \right \\}.
+                       \end{matrix} \right \}.
 ```
 
